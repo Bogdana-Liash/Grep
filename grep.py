@@ -12,13 +12,13 @@ lenghtSearchString = len(searchString)
 
 
 def getIndex(line, subString, searchPosition):
-	lengthWithoutNewLine = len(line)
+	lengthWithoutNewLine = len(line)-1
 	validSearchLength = lengthWithoutNewLine - len(subString)
 	
 	if searchPosition > validSearchLength:
 		return None
 
-	for i in range(searchPosition, validSearchLength):
+	for i in range(searchPosition, validSearchLength+1):
 		if match(line, subString, i):
 			return i
 
