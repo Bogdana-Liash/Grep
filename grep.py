@@ -2,13 +2,24 @@
 
 import sys
 
-exitCode = 1
-if len(sys.argv) != 2:
-	print ('Error. Please write one argument.')
-	sys.exit(exitCode)
+def main():
+	exitCode = 1
+	if len(sys.argv) != 2:
+		print ('Error. Please write one argument.')
+		sys.exit(exitCode)
 
-searchString = sys.argv[1]
-lenghtSearchString = len(searchString)
+	searchString = sys.argv[1]
+	lenghtSearchString = len(searchString)
+
+	for line in sys.stdin:
+		highlightArray = searchHighlightSubstring(line, searchString)
+
+		if len(highlightArray) != 0:
+			string = setColorHighlight(line, highlightArray, searchString)
+			print(string, end='')
+			exitCode = 0
+
+	sys.exit(exitCode)
 
 
 def getIndex(line, subString, searchPosition):
@@ -62,12 +73,5 @@ def setColorHighlight(line, arr, searchString):
 	return highLightedLine
 
 
-for line in sys.stdin:
-	highlightArray = searchHighlightSubstring(line, searchString)
-
-	if len(highlightArray) != 0:
-		string = setColorHighlight(line, highlightArray, searchString)
-		print(string, end='')
-		exitCode = 0
-
-sys.exit(exitCode)
+if __name__ == "__main__":
+    main()
