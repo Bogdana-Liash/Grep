@@ -23,6 +23,17 @@ def main():
 
 
 def getIndex(line, subString, searchPosition):
+	"""Starts search subString in line from searchPosition, if subString is longer than line tail after searchPosition.
+
+	Args:
+		line(string): line for search.
+		subString(string): searched string.
+		searchPosition(int): index to start search from.
+
+	Returns:
+		None if line tail after searchPosition shorter than searchPosition or nothing found.
+		Index(int) inside line, where found substring starts.
+	"""
 	lengthWithoutNewLine = len(line)-1
 	validSearchLength = lengthWithoutNewLine - len(subString)
 	
@@ -37,6 +48,16 @@ def getIndex(line, subString, searchPosition):
 
 
 def match(line, subString, mainLineIndex):
+	"""Compares subString to line from mainLineIndex.
+
+	Args:
+		line(string): line for search.
+		subString(string): searched string.
+		mainLineIndex(int): index from line, which needs to start search subString.
+
+	Returns:
+		True if search is successful, False otherwise.
+	"""
 	for i in range(len(subString)):
 		if subString[i] != line[mainLineIndex + i]:
 			return False
@@ -44,6 +65,15 @@ def match(line, subString, mainLineIndex):
 			
 
 def searchHighlightSubstring(line, subString):
+	"""Fills array with index(-es) from line, where found substring(-s) starts.
+
+	Args:
+		line(string): line for search.
+		subString(string): searched string.
+
+	Returns:
+		full array, if successful search, empty if nothing found.
+	"""
 	arrayIndexToHighlight = []
 	lenghtSubstr = len(subString)
 	lengthLine = len(line)-1
@@ -57,6 +87,13 @@ def searchHighlightSubstring(line, subString):
 
 
 def setColorHighlight(line, arr, searchString):
+	"""Returns line with highlighted found substring(-s). Adds color codes for bash.
+
+	Args:
+		line(string): line for search.
+		arr(array): index(-es) inside line, where found substring(-s) starts.
+		searchString(string): searched string.
+	"""
 	highLightedLine = ''
 	position = 0
 	colorHighlight = '\033[91m'
